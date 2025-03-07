@@ -1,46 +1,61 @@
-import "./Navbar.css";
-import { Link } from "react-router-dom";
-import { useContext } from "react";
-import { AuthContext } from "../../context/auth.context";
+import React from 'react';
+import { Link } from 'react-router-dom';
 
-function Navbar() {
-  // Subscribe to the AuthContext to gain access to
-  // the values from AuthContext.Provider's `value` prop
-  const { isLoggedIn, user, logOutUser } = useContext(AuthContext);
-
+const Navbar = ({ user }) => {
   return (
-    <nav>
-      <Link to="/">
-        <button>Home</button>
-      </Link>
-
-      {isLoggedIn && (
-        <>
-          <button onClick={logOutUser}>Logout</button>
-
-          <Link to="/profile">
-            <button>Profile</button>
-            {/* <img src="https://picsum.photos/id/402/200/300" style={{ width: 50, height: 50, borderRadius: 25}} alt="profile" /> */}
-          </Link>
-
-          <span>{user && user.name}</span>
-        </>
-      )}
-
-      {!isLoggedIn && (
-        <>
-          <Link to="/signup">
-            {" "}
-            <button>Sign Up</button>{" "}
-          </Link>
-          <Link to="/login">
-            {" "}
-            <button>Login</button>{" "}
-          </Link>
-        </>
-      )}
-    </nav>
+    <div className="navbar bg-base-100 shadow-lg">
+      <div className="navbar-start">
+        <div className="dropdown">
+          <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" />
+            </svg>
+          </div>
+          <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
+            <li><Link to="/publicaciones" className="font-medium">Publicaciones</Link></li>
+            <li><Link to="/comentarios" className="font-medium">Comentarios</Link></li>
+          </ul>
+        </div>
+        <Link to="/" className="btn btn-ghost text-xl">TrophyWorld</Link>
+      </div>
+      
+      <div className="navbar-center hidden lg:flex">
+        <ul className="menu menu-horizontal px-1">
+          <li><Link to="/publicaciones" className="font-medium text-lg">Publicaciones</Link></li>
+          <li><Link to="/comentarios" className="font-medium text-lg">Comentarios</Link></li>
+        </ul>
+      </div>
+      
+      <div className="navbar-end">
+        <div className="flex items-center gap-2">
+          <div className="form-control">
+            <input type="text" placeholder="Buscar..." className="input input-bordered w-24 md:w-auto" />
+          </div>
+          
+          <div className="dropdown dropdown-end">
+            <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
+              <div className="w-10 rounded-full">
+                <img 
+                  alt="Perfil de usuario" 
+                  src={user?.profileImage || "https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"} 
+                />
+              </div>
+            </div>
+            <ul tabIndex={0} className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52">
+              <li>
+                <Link to="/perfil" className="justify-between">
+                  Perfil
+                  <span className="badge">Nuevo</span>
+                </Link>
+              </li>
+              <li><Link to="/ajustes">Ajustes</Link></li>
+              <li><Link to="/logout">Cerrar sesión</Link></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
   );
-}
+};
 
 export default Navbar;
