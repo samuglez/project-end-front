@@ -20,22 +20,11 @@ function SignupPage() {
     // Create an object representing the request body
     const requestBody = { email, password, name };
 
-    // Send a request to the server using axios
-    /* 
-    const authToken = localStorage.getItem("authToken");
-    axios.post(
-      `${process.env.REACT_APP_SERVER_URL}/auth/signup`, 
-      requestBody, 
-      { headers: { Authorization: `Bearer ${authToken}` },
-    })
-    .then((response) => {})
-    */
-
-    // Or using a service
+    // Send a request to the server using the auth service
     authService
       .signup(requestBody)
       .then((response) => {
-        // If the POST request is successful redirect to the login page
+        // If the POST request is successful, redirect to the login page
         navigate("/login");
       })
       .catch((error) => {
@@ -46,31 +35,83 @@ function SignupPage() {
   };
 
   return (
-    <div className="SignupPage">
-      <h1>Sign Up</h1>
+    <div className="relative w-full" style={{ height: 'calc(100vh - 4rem)' }}>
+      {/* Fondo con efecto de desenfoque */}
+      <div className="absolute inset-0 bg-black/30 backdrop-blur-sm"></div>
 
-      <form onSubmit={handleSignupSubmit}>
-        <label>Email:</label>
-        <input type="email" name="email" value={email} onChange={handleEmail} />
+      {/* Contenedor del formulario centrado */}
+      <div className="absolute inset-0 flex items-center justify-center">
+        <div className="card w-full max-w-md bg-white/20 backdrop-blur-md rounded-xl shadow-xl">
+          <div className="card-body">
+            <h1 className="card-title text-2xl font-bold mb-4">Sign Up</h1>
+            <form onSubmit={handleSignupSubmit} className="space-y-4">
+              {/* Campo de nombre */}
+              <div className="form-control">
+                <label className="label">
+                  <span className="label-text">Name</span>
+                </label>
+                <input
+                  type="text"
+                  placeholder="Enter your name"
+                  className="input input-bordered"
+                  value={name}
+                  onChange={handleName}
+                />
+              </div>
 
-        <label>Password:</label>
-        <input
-          type="password"
-          name="password"
-          value={password}
-          onChange={handlePassword}
-        />
+              {/* Campo de correo electrónico */}
+              <div className="form-control">
+                <label className="label">
+                  <span className="label-text">Email</span>
+                </label>
+                <input
+                  type="email"
+                  placeholder="Enter your email"
+                  className="input input-bordered"
+                  value={email}
+                  onChange={handleEmail}
+                />
+              </div>
 
-        <label>Name:</label>
-        <input type="text" name="name" value={name} onChange={handleName} />
+              {/* Campo de contraseña */}
+              <div className="form-control">
+                <label className="label">
+                  <span className="label-text">Password</span>
+                </label>
+                <input
+                  type="password"
+                  placeholder="Enter your password"
+                  className="input input-bordered"
+                  value={password}
+                  onChange={handlePassword}
+                />
+              </div>
 
-        <button type="submit">Sign Up</button>
-      </form>
+              {/* Botón de registro */}
+              <div className="form-control mt-6">
+                <button type="submit" className="btn btn-primary">
+                  Sign Up
+                </button>
+              </div>
+            </form>
 
-      {errorMessage && <p className="error-message">{errorMessage}</p>}
+            {/* Mensaje de error */}
+            {errorMessage && (
+              <div className="alert alert-error mt-4">
+                <span>{errorMessage}</span>
+              </div>
+            )}
 
-      <p>Already have account?</p>
-      <Link to={"/login"}> Login</Link>
+            {/* Enlace para iniciar sesión */}
+            <p className="mt-4 text-center">
+              Already have an account?{" "}
+              <Link to={"/login"} className="link link-primary">
+                Login
+              </Link>
+            </p>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

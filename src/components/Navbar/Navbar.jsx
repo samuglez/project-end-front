@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 const Navbar = ({ user }) => {
   return (
-    <div className="navbar bg-base-100 shadow-lg">
+    <div className="navbar bg-base-100 shadow-lg h-16"> {/* Asegúrate de que el Navbar tenga una altura fija */}
       <div className="navbar-start">
         <div className="dropdown">
           <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -14,6 +14,7 @@ const Navbar = ({ user }) => {
           <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
             <li><Link to="/publicaciones" className="font-medium">Publicaciones</Link></li>
             <li><Link to="/comentarios" className="font-medium">Comentarios</Link></li>
+            <li><Link to="/signup" className="font-medium">Registrarse</Link></li> {/* Enlace para registrarse */}
           </ul>
         </div>
         <Link to="/" className="btn btn-ghost text-xl">TrophyWorld</Link>
@@ -23,6 +24,7 @@ const Navbar = ({ user }) => {
         <ul className="menu menu-horizontal px-1">
           <li><Link to="/publicaciones" className="font-medium text-lg">Publicaciones</Link></li>
           <li><Link to="/comentarios" className="font-medium text-lg">Comentarios</Link></li>
+          <li><Link to="/signup" className="font-medium text-lg">Registrarse</Link></li> {/* Enlace para registrarse */}
         </ul>
       </div>
       
