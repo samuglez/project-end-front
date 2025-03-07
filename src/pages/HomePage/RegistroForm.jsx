@@ -2,7 +2,7 @@ import React from 'react';
 
 const RegistroForm = () => {
   return (
-    <div className="relative w-full" style={{ height: 'calc(100vh - 4rem)' }}>
+    <div className="relative w-full" style={{ height: 'calc(100vh - 5rem)' }}>
       {/* Fondo con efecto de desenfoque */}
       <div className="absolute inset-0 bg-black/30 backdrop-blur-sm"></div>
 
