@@ -43,16 +43,16 @@ function SignupPage() {
       <div className="absolute inset-0 flex items-center justify-center">
         <div className="card w-full max-w-md bg-white/20 backdrop-blur-md rounded-xl shadow-xl">
           <div className="card-body">
-            <h1 className="card-title text-2xl font-bold mb-4">Sign Up</h1>
+            <h1 className="card-title text-2xl font-bold mb-4">Registrarse</h1>
             <form onSubmit={handleSignupSubmit} className="space-y-4">
               {/* Campo de nombre */}
               <div className="form-control">
                 <label className="label">
-                  <span className="label-text">Name</span>
+                  <span className="label-text">Nombre</span>
                 </label>
                 <input
                   type="text"
-                  placeholder="Enter your name"
+                  placeholder="Tu nombre..."
                   className="input input-bordered"
                   value={name}
                   onChange={handleName}
@@ -66,7 +66,7 @@ function SignupPage() {
                 </label>
                 <input
                   type="email"
-                  placeholder="Enter your email"
+                  placeholder="Tu email..."
                   className="input input-bordered"
                   value={email}
                   onChange={handleEmail}
@@ -76,11 +76,11 @@ function SignupPage() {
               {/* Campo de contraseña */}
               <div className="form-control">
                 <label className="label">
-                  <span className="label-text">Password</span>
+                  <span className="label-text">Contraseña</span>
                 </label>
                 <input
                   type="password"
-                  placeholder="Enter your password"
+                  placeholder="Tu contraseña..."
                   className="input input-bordered"
                   value={password}
                   onChange={handlePassword}
@@ -90,7 +90,7 @@ function SignupPage() {
               {/* Botón de registro */}
               <div className="form-control mt-6">
                 <button type="submit" className="btn btn-primary">
-                  Sign Up
+                  Registrarse
                 </button>
               </div>
             </form>
@@ -104,9 +104,9 @@ function SignupPage() {
 
             {/* Enlace para iniciar sesión */}
             <p className="mt-4 text-center">
-              Already have an account?{" "}
+              ¿Ya tienes una cuenta?{" "}
               <Link to={"/login"} className="link link-primary">
-                Login
+                Iniciar sesión
               </Link>
             </p>
           </div>

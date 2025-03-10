@@ -15,6 +15,7 @@ const Navbar = ({ user }) => {
             <li><Link to="/publicaciones" className="font-medium">Publicaciones</Link></li>
             <li><Link to="/comentarios" className="font-medium">Comentarios</Link></li>
             <li><Link to="/signup" className="font-medium">Registrarse</Link></li> {/* Enlace para registrarse */}
+            <li><Link to="/login" className="font-medium">Iniciar Sesión</Link></li>
           </ul>
         </div>
         <Link to="/" className="btn btn-ghost text-xl">TrophyWorld</Link>
@@ -25,6 +26,7 @@ const Navbar = ({ user }) => {
           <li><Link to="/publicaciones" className="font-medium text-lg">Publicaciones</Link></li>
           <li><Link to="/comentarios" className="font-medium text-lg">Comentarios</Link></li>
           <li><Link to="/signup" className="font-medium text-lg">Registrarse</Link></li> {/* Enlace para registrarse */}
+          <li><Link to="/login" className="font-medium text-lg">Iniciar Sesión</Link></li>
         </ul>
       </div>
       
