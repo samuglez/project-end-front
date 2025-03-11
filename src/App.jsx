@@ -9,7 +9,9 @@ import LoginPage from "./pages/LoginPage/LoginPage";
 import Navbar from "./components/Navbar/Navbar";
 import IsPrivate from "./components/IsPrivate/IsPrivate";
 import IsAnon from "./components/IsAnon/IsAnon";
-import AllPostsPage from "./pages/AllPostsPage/AllPostsPage";
+// import AllPostsPage from "./pages/AllPostsPage/AllPostsPage";
+import PublicacionDetailPage from "./pages/PublicacionDetailPage/PublicacionDetailPage";
+import PublicacionesPage from "./pages/PublicacionesPage/PublicacionesPage";
 
 function App() {
   return (
@@ -18,7 +20,9 @@ function App() {
 
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="/publicaciones" element={<AllPostsPage />} />
+        {/* <Route path="/publicaciones" element={<AllPostsPage />} /> */}
+        <Route path="/publicaciones/:publicacionId" element={<PublicacionDetailPage />} />
+        <Route path="/publicaciones" element={<PublicacionesPage />} />
 
         <Route
           path="/profile"

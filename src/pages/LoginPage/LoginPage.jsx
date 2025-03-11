@@ -1,4 +1,3 @@
-import "./LoginPage.css";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import authService from "../../services/auth.service";
@@ -13,23 +12,19 @@ function LoginPage() {
   const handleEmail = (e) => setEmail(e.target.value);
   const handlePassword = (e) => setPassword(e.target.value);
 
-  const handleLoginSubmit = (e) => {
+  const handleLoginSubmit = async (e) => {
     e.preventDefault();
-    // Crear un objeto que representa el cuerpo de la solicitud
-    const requestBody = { email, password };
 
-    // Enviar la solicitud al servidor usando el servicio de autenticación
-    authService
-      .login(requestBody)
-      .then((response) => {
-        // Si la solicitud es exitosa, redirigir al usuario a la página de inicio
-        navigate("/");
-      })
-      .catch((error) => {
-        // Si la solicitud falla, establecer el mensaje de error en el estado
-        const errorDescription = error.response.data.message;
-        setErrorMessage(errorDescription);
-      });
+    try {
+      const response = await authService.login({ email, password });
+
+      if (response.data.authToken) {
+        localStorage.setItem("authToken", response.data.authToken); // Guardar el token en el localStorage
+        navigate("/"); // Redirigir al inicio después del login
+      }
+    } catch (error) {
+      setErrorMessage("Error al iniciar sesión. Inténtalo de nuevo.");
+    }
   };
 
   return (
