@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import authService from "../../services/auth.service";
+import { AuthContext } from "../../context/auth.context"; // Importamos el contexto
 
 function LoginPage() {
   const [email, setEmail] = useState("");
@@ -8,6 +9,7 @@ function LoginPage() {
   const [errorMessage, setErrorMessage] = useState(undefined);
 
   const navigate = useNavigate();
+  const { storeToken, authenticateUser } = useContext(AuthContext); // Obtenemos las funciones necesarias
 
   const handleEmail = (e) => setEmail(e.target.value);
   const handlePassword = (e) => setPassword(e.target.value);
@@ -19,8 +21,9 @@ function LoginPage() {
       const response = await authService.login({ email, password });
 
       if (response.data.authToken) {
-        localStorage.setItem("authToken", response.data.authToken); // Guardar el token en el localStorage
-        navigate("/"); // Redirigir al inicio después del login
+        storeToken(response.data.authToken); // Guarda el token
+        authenticateUser(); // Actualiza el estado global
+        navigate("/"); // Redirigir al inicio
       }
     } catch (error) {
       setErrorMessage("Error al iniciar sesión. Inténtalo de nuevo.");

@@ -15,7 +15,7 @@ function ComentarioForm({ publicacionId, onComentarioAdded }) {
 
     try {
       // Enviar la solicitud para crear el comentario
-      await comentarioService.createComentario(publicacionId, { content });
+      await comentarioService.createComentario(publicacionId,  content );
       setContent("");
       setErrorMessage("");
       onComentarioAdded(); // Actualizar la lista de comentarios
