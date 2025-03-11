@@ -1,49 +1,37 @@
 import "./ProfilePage.css";
-import { useEffect, useState, useContext } from "react";
+import { useEffect, useState, useContext, useCallback } from "react";
 import { useParams } from "react-router-dom";
-import postService from "../../services/postService";
+import publicacionService from "../../services/publicacion.service";
 import { AuthContext } from "../../context/auth.context";
 
 function ProfilePage() {
   const { userId } = useParams();
-  const [posts, setPosts] = useState([]);
+  const [publicaciones, setPublicaciones] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [profile, setProfile] = useState(null);
   
   // Usar el contexto de autenticación
   const { isLoggedIn, user, isLoading } = useContext(AuthContext);
 
-  // Función para obtener las publicaciones del usuario
-  const fetchUserPosts = async () => {
+  // Usar useCallback para memoizar la función fetchUserPublicaciones
+  const fetchUserPublicaciones = useCallback(async () => {
     try {
-      const response = await postService.getUserPosts(userId);
-      setPosts(response.data);
+      const response = await publicacionService.getPublicacionesByUsuario(userId);
+      setPublicaciones(response.data);
       setLoading(false);
     } catch (error) {
       setError("Error al cargar las publicaciones");
+      console.error("Error al cargar publicaciones:", error);
       setLoading(false);
     }
-  };
-
-  // Función para cargar datos del perfil del usuario
-  const fetchUserProfile = async () => {
-    try {
-      const profileResponse = await postService.getUserProfile(userId);
-      setProfile(profileResponse.data);
-    } catch (profileError) {
-      console.error("Error al cargar el perfil:", profileError);
-      // No establecemos error general para que las publicaciones aún puedan mostrarse
-    }
-  };
+  }, [userId]); // userId como dependencia de la función
 
   // Efecto para cargar datos cuando el componente se monta o cambia el userId
   useEffect(() => {
     if (!isLoading) { // Esperar a que se cargue el estado de autenticación
-      fetchUserPosts();
-      fetchUserProfile();
+      fetchUserPublicaciones();
     }
-  }, [userId, isLoading]);
+  }, [userId, isLoading, fetchUserPublicaciones]); // Incluir fetchUserPublicaciones en las dependencias
 
   // Verificar si estamos viendo nuestro propio perfil
   const isOwnProfile = isLoggedIn && user && user._id === userId;
@@ -62,26 +50,19 @@ function ProfilePage() {
         {isOwnProfile ? "Mi Perfil" : "Perfil del Usuario"}
       </h1>
 
-      {/* Información del perfil si está disponible */}
-      {profile && (
-        <div className="mb-8 p-4 bg-white shadow-md rounded-lg">
-          <h2 className="text-xl font-semibold">{profile.username || profile.name}</h2>
-          {profile.bio && <p className="text-gray-600 mt-2">{profile.bio}</p>}
-          {profile.email && <p className="text-gray-500 text-sm mt-1">{profile.email}</p>}
-          
-          {/* Mostrar botones de edición solo si es el perfil propio */}
-          {isOwnProfile && (
-            <div className="mt-4">
-              <button className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 mr-2">
-                Editar Perfil
-              </button>
-              <button className="px-4 py-2 bg-gray-200 text-gray-700 rounded hover:bg-gray-300">
-                Cambiar Contraseña
-              </button>
-            </div>
-          )}
-        </div>
-      )}
+      {/* Información básica del perfil */}
+      <div className="mb-8 p-4 bg-white shadow-md rounded-lg">
+        <h2 className="text-xl font-semibold">{user && isOwnProfile ? user.username || user.name : "Usuario"}</h2>
+        
+        {/* Mostrar botones de edición solo si es el perfil propio */}
+        {isOwnProfile && (
+          <div className="mt-4">
+            <button className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 mr-2">
+              Editar Perfil
+            </button>
+          </div>
+        )}
+      </div>
 
       {/* Lista de publicaciones */}
       <div className="space-y-6">
@@ -93,15 +74,25 @@ function ProfilePage() {
           </button>
         )}
         
-        {posts.length > 0 ? (
-          posts.map((post) => (
-            <div key={post._id} className="card bg-base-100 shadow-xl">
+        {publicaciones.length > 0 ? (
+          publicaciones.map((publicacion) => (
+            <div key={publicacion._id} className="card bg-base-100 shadow-xl">
               <div className="card-body">
-                <h3 className="card-title text-xl font-bold">{post.title}</h3>
-                <p className="text-gray-700">{post.content}</p>
+                <h3 className="card-title text-xl font-bold">{publicacion.nombreJuego}</h3>
+                <div className="flex flex-wrap gap-2 my-2">
+                  <span className="badge badge-primary">Plataforma: {publicacion.plataforma}</span>
+                  <span className="badge badge-secondary">Dificultad: {publicacion.dificultad}</span>
+                  <span className="badge badge-accent">Duración: {publicacion.duracion}</span>
+                  {publicacion.trofeosLogros && (
+                    <span className="badge badge-info">Trofeos/Logros: {publicacion.trofeosLogros}</span>
+                  )}
+                </div>
+                <p className="text-gray-700">{publicacion.contenido}</p>
                 <div className="card-actions justify-between items-center mt-4">
                   <span className="text-sm text-gray-500">
-                    Publicado el: {new Date(post.createdAt).toLocaleDateString()}
+                    Publicado el: {new Date(publicacion.fechaPublicacion).toLocaleDateString()}
+                    {publicacion.fechaActualizacion && 
+                      ` (Actualizado: ${new Date(publicacion.fechaActualizacion).toLocaleDateString()})`}
                   </span>
                   
                   {/* Mostrar opciones de edición/eliminación solo si es el perfil propio */}
