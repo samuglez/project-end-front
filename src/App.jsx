@@ -14,6 +14,7 @@ import PublicacionesPage from "./pages/PublicacionesPage/PublicacionesPage";
 import CrearPublicacionPage from "./components/CrearPublicacion/CrearPublicacion";
 import MisPublicacionesPage from "./pages/MisPublicacionesPage/MisPublicacionesPage";
 import EditarPublicacionPage from "./pages/EditarPublicacionPage/EditarPublicacionPage";
+import ComentariosPage from "./pages/ComentariosPage/ComentariosPage"; // Importa el componente ComentariosPage
 
 function App() {
   return (
@@ -25,6 +26,16 @@ function App() {
         <Route path="/publicaciones" element={<PublicacionesPage />} />
         <Route path="/publicaciones/:publicacionId" element={<PublicacionDetailPage />} />
 
+        {/* Ruta para ver los comentarios de una publicación */}
+        <Route
+          path="/comentarios/publicacion/:publicacionId"
+          element={
+            <IsPrivate>
+              <ComentariosPage />
+            </IsPrivate>
+          }
+        />
+
         <Route
           path="/profile"
           element={
@@ -34,25 +45,29 @@ function App() {
           }
         />
         <Route
-  path="/publicaciones/nueva"
-  element={
-    <IsPrivate>
-      <CrearPublicacionPage />
-    </IsPrivate>
-  }
-/>
-<Route
-  path="/mis-publicaciones"
-  element={
-    <IsPrivate>
-      <MisPublicacionesPage />
-    </IsPrivate>
-  }
-/>
-<Route
-  path="/publicaciones/editar/:id" element={<IsPrivate><EditarPublicacionPage /></IsPrivate>}
-/>
-
+          path="/publicaciones/nueva"
+          element={
+            <IsPrivate>
+              <CrearPublicacionPage />
+            </IsPrivate>
+          }
+        />
+        <Route
+          path="/mis-publicaciones"
+          element={
+            <IsPrivate>
+              <MisPublicacionesPage />
+            </IsPrivate>
+          }
+        />
+        <Route
+          path="/publicaciones/editar/:id"
+          element={
+            <IsPrivate>
+              <EditarPublicacionPage />
+            </IsPrivate>
+          }
+        />
 
         <Route
           path="/signup"

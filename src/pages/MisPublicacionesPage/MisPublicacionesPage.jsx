@@ -108,6 +108,9 @@ function MisPublicacionesPage() {
                     <button className="btn btn-sm btn-error" onClick={() => handleDelete(publicacion._id)}>
                       Borrar
                     </button>
+                    <Link to={`/comentarios/publicacion/${publicacion._id}`} className="btn btn-sm btn-info">
+                      Ver Comentarios
+                    </Link>
                   </div>
                 </div>
               </div>
