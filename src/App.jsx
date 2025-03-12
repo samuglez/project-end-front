@@ -11,6 +11,7 @@ import IsPrivate from "./components/IsPrivate/IsPrivate";
 import IsAnon from "./components/IsAnon/IsAnon";
 import PublicacionDetailPage from "./pages/PublicacionDetailPage/PublicacionDetailPage";
 import PublicacionesPage from "./pages/PublicacionesPage/PublicacionesPage";
+import CrearPublicacionPage from "./components/CrearPublicacionPage/CrearPublicacionPage";
 
 function App() {
   return (
@@ -30,6 +31,14 @@ function App() {
             </IsPrivate>
           }
         />
+        <Route
+  path="/publicaciones/nueva"
+  element={
+    <IsPrivate>
+      <CrearPublicacionPage />
+    </IsPrivate>
+  }
+/>
 
         <Route
           path="/signup"

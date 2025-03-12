@@ -1,11 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import publicacionService from "../../services/publicacion.service";
+import { AuthContext } from "../../context/auth.context"; // Importamos el contexto de autenticación
 
 function PublicacionesPage() {
   const [publicaciones, setPublicaciones] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  
+  const { isLoggedIn } = useContext(AuthContext); // Obtenemos si el usuario está autenticado
 
   // Función para obtener todas las publicaciones
   const fetchPublicaciones = async () => {
@@ -34,7 +37,16 @@ function PublicacionesPage() {
 
   return (
     <div className="p-6">
-      <h1 className="text-3xl font-bold mb-6">Todas las Publicaciones</h1>
+      <div className="flex justify-between items-center mb-6">
+        <h1 className="text-3xl font-bold">Todas las Publicaciones</h1>
+        
+        {/* Mostrar botón solo si el usuario está autenticado */}
+        {isLoggedIn && (
+          <Link to="/publicaciones/nueva" className="btn btn-success">
+            + Crear Publicación
+          </Link>
+        )}
+      </div>
 
       {/* Lista de publicaciones */}
       <div className="space-y-6">
