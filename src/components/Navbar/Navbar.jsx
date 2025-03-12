@@ -22,7 +22,7 @@ const Navbar = () => {
           </div>
           <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
             <li><Link to="/publicaciones" className="font-medium">Publicaciones</Link></li>
-            <li><Link to="/comentarios" className="font-medium">Comentarios</Link></li>
+            <li><Link to="/mis-publicaciones" className="font-medium">Mis Publicaciones</Link></li>
             {!isLoggedIn && (
               <>
                 <li><Link to="/signup" className="font-medium">Registrarse</Link></li>
@@ -37,7 +37,7 @@ const Navbar = () => {
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">
           <li><Link to="/publicaciones" className="font-medium text-lg">Publicaciones</Link></li>
-          <li><Link to="/comentarios" className="font-medium text-lg">Comentarios</Link></li>
+          <li><Link to="/mis-publicaciones" className="font-medium text-lg">Mis Publicaciones</Link></li>
           {!isLoggedIn && (
             <>
               <li><Link to="/signup" className="font-medium text-lg">Registrarse</Link></li>
@@ -49,10 +49,6 @@ const Navbar = () => {
 
       <div className="navbar-end">
         <div className="flex items-center gap-2">
-          <div className="form-control">
-            <input type="text" placeholder="Buscar..." className="input input-bordered w-24 md:w-auto" />
-          </div>
-
           {isLoggedIn && (
             <div className="dropdown dropdown-end">
               <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">

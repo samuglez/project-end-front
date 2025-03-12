@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import publicacionService from "../../services/publicacion.service";
-import comentarioService from "../../services/comentario.service";
 import ComentarioForm from "../../components/ComentarioForm/ComentarioForm";
 
 function PublicacionDetailPage() {

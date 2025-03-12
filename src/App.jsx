@@ -11,7 +11,9 @@ import IsPrivate from "./components/IsPrivate/IsPrivate";
 import IsAnon from "./components/IsAnon/IsAnon";
 import PublicacionDetailPage from "./pages/PublicacionDetailPage/PublicacionDetailPage";
 import PublicacionesPage from "./pages/PublicacionesPage/PublicacionesPage";
-import CrearPublicacionPage from "./components/CrearPublicacionPage/CrearPublicacionPage";
+import CrearPublicacionPage from "./components/CrearPublicacion/CrearPublicacion";
+import MisPublicacionesPage from "./pages/MisPublicacionesPage/MisPublicacionesPage";
+import EditarPublicacionPage from "./pages/EditarPublicacionPage/EditarPublicacionPage";
 
 function App() {
   return (
@@ -39,6 +41,18 @@ function App() {
     </IsPrivate>
   }
 />
+<Route
+  path="/mis-publicaciones"
+  element={
+    <IsPrivate>
+      <MisPublicacionesPage />
+    </IsPrivate>
+  }
+/>
+<Route
+  path="/publicaciones/editar/:id" element={<IsPrivate><EditarPublicacionPage /></IsPrivate>}
+/>
+
 
         <Route
           path="/signup"

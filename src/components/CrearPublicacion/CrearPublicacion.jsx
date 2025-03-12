@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import publicacionService from "../../services/publicacion.service";
 
-function CrearPublicacionPage() {
+function CrearPublicacion() {
   const [form, setForm] = useState({
     nombreJuego: "",
     trofeosLogros: "",
@@ -82,4 +82,4 @@ function CrearPublicacionPage() {
   );
 }
 
-export default CrearPublicacionPage;
+export default CrearPublicacion;
