@@ -1,70 +1,61 @@
-# Getting Started with Create React App
+# TrophyWorld - Frontend
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Este es el frontend de **TrophyWorld**, una aplicación desarrollada con React para  compartir trofeos/logros de consola.
 
-## Available Scripts
+## Tecnologías utilizadas
 
-In the project directory, you can run:
+### Lenguaje y entorno
 
-### `npm start`
+- **JavaScript (ES6+)**: Lenguaje de programación principal.
+- **React**: Biblioteca para construir interfaces de usuario interactivas y eficientes.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### Librerías principales
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- **React Router DOM**: Para manejar la navegación y el enrutamiento en la aplicación.
+- **Axios**: Cliente HTTP para realizar peticiones al backend.
+- **Lucide React**: Conjunto de iconos modernos y personalizables.
 
-### `npm test`
+### Estilos
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- **Tailwind CSS**: Framework de utilidades para un diseño rápido y responsive.
+- **DaisyUI**: Extensión de Tailwind que proporciona componentes estilizados.
 
-### `npm run build`
+### Testing
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- **@testing-library/react**: Para pruebas unitarias en componentes de React.
+- **@testing-library/jest-dom**: Extensiones para mejorar las aserciones en Jest.
+- **@testing-library/user-event**: Simula interacciones del usuario en los tests.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Instalación y ejecución
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+1. Clona este repositorio:
 
-### `npm run eject`
+   ```sh
+   https://github.com/samuglez/project-end-front.git
+   cd project-end-front
+   ```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+2. Instala las dependencias:
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+   ```sh
+   npm install
+   ```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+3. Inicia la aplicación en modo desarrollo:
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+   ```sh
+   npm start
+   ```
 
-## Learn More
+4. Para generar una versión lista para producción:
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+   ```sh
+   npm run build
+   ```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Conexión con el backend
 
-### Code Splitting
+[https://github.com/samuglez/project-end-back](https://github.com/samuglez/project-end-back)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
 
-### Analyzing the Bundle Size
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
