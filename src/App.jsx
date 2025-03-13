@@ -7,6 +7,7 @@ import SignupPage from "./pages/SignupPage/SignupPage";
 import LoginPage from "./pages/LoginPage/LoginPage";
 
 import Navbar from "./components/Navbar/Navbar";
+import Footer from "./components/Footer/Footer";
 import IsPrivate from "./components/IsPrivate/IsPrivate";
 import IsAnon from "./components/IsAnon/IsAnon";
 import PublicacionDetailPage from "./pages/PublicacionDetailPage/PublicacionDetailPage";
@@ -20,6 +21,7 @@ function App() {
   return (
     <div className="App">
       <Navbar />
+      
 
       <Routes>
         <Route path="/" element={<HomePage />} />
@@ -86,6 +88,8 @@ function App() {
           }
         />
       </Routes>
+      <Footer/>
+      
     </div>
   );
 }
