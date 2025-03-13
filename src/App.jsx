@@ -20,15 +20,12 @@ import ComentariosPage from "./pages/ComentariosPage/ComentariosPage"; // Import
 function App() {
   return (
     <div className="App">
+      <div className="mb-10">
       <Navbar />
-      
-
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/publicaciones" element={<PublicacionesPage />} />
         <Route path="/publicaciones/:publicacionId" element={<PublicacionDetailPage />} />
-
-        {/* Ruta para ver los comentarios de una publicación */}
         <Route
           path="/comentarios/publicacion/:publicacionId"
           element={
@@ -37,7 +34,6 @@ function App() {
             </IsPrivate>
           }
         />
-
         <Route
           path="/profile"
           element={
@@ -70,7 +66,6 @@ function App() {
             </IsPrivate>
           }
         />
-
         <Route
           path="/signup"
           element={
@@ -88,8 +83,8 @@ function App() {
           }
         />
       </Routes>
+      </div>
       <Footer/>
-      
     </div>
   );
 }
