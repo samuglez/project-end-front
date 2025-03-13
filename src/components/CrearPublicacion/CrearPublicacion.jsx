@@ -35,7 +35,7 @@ function CrearPublicacion() {
   };
 
   return (
-    <div className="relative w-full" style={{ height: 'calc(100vh - 4rem)' }}>
+    <div className="relative w-full" style={{ height: 'calc(100vh - 7rem)' }}>
       <div className="absolute inset-0 bg-black/30 backdrop-blur-sm"></div>
       <div className="absolute inset-0 flex items-center justify-center">
         <div className="card w-full max-w-md bg-white/20 backdrop-blur-md rounded-xl shadow-xl">
