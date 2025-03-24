@@ -16,12 +16,14 @@ import CrearPublicacionPage from "./components/CrearPublicacion/CrearPublicacion
 import MisPublicacionesPage from "./pages/MisPublicacionesPage/MisPublicacionesPage";
 import EditarPublicacionPage from "./pages/EditarPublicacionPage/EditarPublicacionPage";
 import ComentariosPage from "./pages/ComentariosPage/ComentariosPage"; // Importa el componente ComentariosPage
+import Chatbot from "./components/Chatbot/Chatbot";
 
 function App() {
   return (
     <div className="App">
       <div className="mb-10">
       <Navbar />
+      <Chatbot />
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/publicaciones" element={<PublicacionesPage />} />
