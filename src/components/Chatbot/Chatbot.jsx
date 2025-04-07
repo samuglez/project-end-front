@@ -1,78 +1,93 @@
 import React, { useState } from "react";
 import axios from "axios";
-const model =process.env.REACT_APP_SERVER_URL;
+
+const model = process.env.REACT_APP_SERVER_URL;
+
 const Chatbot = () => {
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
+  const [isOpen, setIsOpen] = useState(false); // Visibilidad del chat
+
   const sendMessage = async () => {
     if (!input.trim()) return;
+
     const userMessage = { text: input, sender: "user" };
-    setMessages((prevMessages) => [...prevMessages, userMessage]);
+    setMessages((prev) => [...prev, userMessage]);
     setInput("");
     setLoading(true);
+
     try {
-      // Llama al endpoint del backend
-      const response = await axios.post(`${model}/api/ia/chat`, {
-        prompt: input,
-      });
-      // Depura la respuesta del backend
-      console.log("Respuesta del backend:", response.data.response);
-      // Extrae el texto del mensaje del bot
-      let botMessageText = "";
-      if (response.data.response ) {
-        botMessageText = response.data.response;
-      } else {
-        botMessageText = "No se pudo obtener una respuesta válida del bot.";
-      }
-      const botMessage = { text: botMessageText, sender: "bot" };
-      setMessages((prevMessages) => [...prevMessages, botMessage]);
+      const response = await axios.post(`${model}/api/ia/chat`, { prompt: input });
+      const botText = response.data.response || "No se pudo obtener una respuesta válida del bot.";
+      const botMessage = { text: botText, sender: "bot" };
+      setMessages((prev) => [...prev, botMessage]);
     } catch (error) {
-      console.error("Error al enviar el mensaje:", error);
+      console.error("Error:", error);
       const errorMessage = { text: "Hubo un error al procesar tu solicitud.", sender: "bot" };
-      setMessages((prevMessages) => [...prevMessages, errorMessage]);
+      setMessages((prev) => [...prev, errorMessage]);
     } finally {
       setLoading(false);
     }
   };
+
   return (
-    <div style={{ maxWidth: 400, margin: "auto", textAlign: "center" }}>
-      <h2>Chatbot</h2>
-      <div
-        style={{
-          height: 300,
-          overflowY: "auto",
-          border: "1px solid #ccc",
-          padding: 10,
-          marginBottom: 10,
-        }}
+    <div className="fixed bottom-4 right-4 z-50">
+      {/* Botón flotante */}
+      <button
+        className="btn btn-primary btn-circle text-xl"
+        onClick={() => setIsOpen(!isOpen)}
+        title="Abrir chat"
       >
-        {messages.map((msg, index) => (
-          <div
-            key={index}
-            style={{
-              textAlign: msg.sender === "user" ? "right" : "left",
-              marginBottom: 10,
-            }}
-          >
-            <p>
-              <strong>{msg.sender === "user" ? "Tú" : "Bot"}:</strong> {msg.text}
-            </p>
-          </div>
-        ))}
-      </div>
-      <input
-        type="text"
-        value={input}
-        onChange={(e) => setInput(e.target.value)}
-        onKeyDown={(e) => e.key === "Enter" && sendMessage()}
-        placeholder="Escribe tu mensaje..."
-        style={{ width: "80%", padding: 5 }}
-      />
-      <button onClick={sendMessage} style={{ marginLeft: 10 }} disabled={loading}>
-        {loading ? "Cargando..." : "Enviar"}
+        {isOpen ? "✖" : "💬"}
       </button>
+
+      {/* Ventana del chat */}
+      {isOpen && (
+        <div className="card w-80 bg-base-100 shadow-xl mt-4">
+          <div className="card-body p-4 flex flex-col h-[400px]">
+            <h2 className="card-title mb-2">Chatbot</h2>
+
+            {/* Mensajes */}
+            <div className="flex-1 overflow-y-auto space-y-2 mb-2">
+              {messages.map((msg, idx) => (
+                <div
+                  key={idx}
+                  className={`chat ${
+                    msg.sender === "user" ? "chat-end" : "chat-start"
+                  }`}
+                >
+                  <div className="chat-bubble">
+                    <strong>{msg.sender === "user" ? "Tú" : "Bot"}:</strong>{" "}
+                    {msg.text}
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Input y botón */}
+            <div className="flex gap-2">
+              <input
+                type="text"
+                value={input}
+                onChange={(e) => setInput(e.target.value)}
+                onKeyDown={(e) => e.key === "Enter" && sendMessage()}
+                placeholder="Escribe tu mensaje..."
+                className="input input-bordered input-sm w-full"
+              />
+              <button
+                onClick={sendMessage}
+                className="btn btn-primary btn-sm"
+                disabled={loading}
+              >
+                {loading ? <span className="loading loading-spinner loading-sm" /> : "Enviar"}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
+
 export default Chatbot;
