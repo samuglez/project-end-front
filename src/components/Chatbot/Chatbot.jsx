@@ -7,7 +7,7 @@ const Chatbot = () => {
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
-  const [isOpen, setIsOpen] = useState(false); // Visibilidad del chat
+  const [isOpen, setIsOpen] = useState(false);
 
   const sendMessage = async () => {
     if (!input.trim()) return;
@@ -33,7 +33,6 @@ const Chatbot = () => {
 
   return (
     <div className="fixed bottom-4 right-4 z-50">
-      {/* Botón flotante */}
       <button
         className="btn btn-primary btn-circle text-xl"
         onClick={() => setIsOpen(!isOpen)}
@@ -41,14 +40,10 @@ const Chatbot = () => {
       >
         {isOpen ? "✖" : "💬"}
       </button>
-
-      {/* Ventana del chat */}
       {isOpen && (
         <div className="card w-80 bg-base-100 shadow-xl mt-4">
           <div className="card-body p-4 flex flex-col h-[400px]">
             <h2 className="card-title mb-2">Chatbot</h2>
-
-            {/* Mensajes */}
             <div className="flex-1 overflow-y-auto space-y-2 mb-2">
               {messages.map((msg, idx) => (
                 <div
@@ -64,8 +59,6 @@ const Chatbot = () => {
                 </div>
               ))}
             </div>
-
-            {/* Input y botón */}
             <div className="flex gap-2">
               <input
                 type="text"
